@@ -1,0 +1,9 @@
+environment       = "prod"
+destination_name  = "central-logs"
+agency_domain_name = "example-huaweicloud-domain"
+source_account_ids = ["<application-account-id-1>", "<application-account-id-2>"]
+
+# 可选覆盖
+# log_retention_days   = 365
+# obs_transfer_period  = 1
+# obs_transfer_period_unit = "hour"

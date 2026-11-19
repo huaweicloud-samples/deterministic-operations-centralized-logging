@@ -1,0 +1,62 @@
+environment            = "prod"
+account_name           = "app-1"
+destination_name       = "central-logs"
+
+# 日志归档账号 apply 后输出的各服务中央桶名
+archive_obs_buckets = {
+  rds      = "<archive-bucket>-rds-logs"
+  cce      = "<archive-bucket>-cce-logs"
+  function = "<archive-bucket>-function-logs"
+}
+
+# 日志归档账号的账号域名(IAM 委托被委托方)
+archive_domain_name = "<archive-domain-name>"
+
+# 本应用账号信息(华为云「我的凭证」页面获取)
+agency_domain_id   = "<this-account-domain-id>"
+agency_domain_name = "<this-account-domain-name>"
+agency_project_id  = "<this-account-project-id>"
+
+tags = {
+  Environment = "production"
+  Project     = "centralized-logging"
+  Owner       = "platform-team"
+}
+
+vpc_config = {
+  vpc_cidr        = "10.0.0.0/16"
+  private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
+  public_subnets  = ["10.0.3.0/24", "10.0.4.0/24"]
+}
+
+rds_config = {
+  identifier        = "db-instance"
+  allocated_storage = 40
+  engine            = "mysql"
+  engine_version    = "8.0"
+  instance_class    = "rds.mysql.c6.large.2"
+  username          = "admin"
+}
+
+rds_parameters = {
+  general_log     = 1
+  slow_query_log  = 1
+  long_query_time = 10
+  log_output      = "FILE"
+}
+
+cce_config = {
+  cluster_name    = "central-logging-cce"
+  cluster_version = "v1.27"
+  flavor_id       = "cce.s1.small"
+}
+
+function_config = {
+  name        = "sample-app"
+  runtime     = "Python3.9"
+  timeout     = 30
+  memory_size = 128
+}
+
+ingress_allowed_cidr_blocks = ["10.0.0.0/16"]
+egress_allowed_cidr_blocks  = ["10.0.0.0/16"]

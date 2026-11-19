@@ -1,0 +1,138 @@
+{
+  "version": 4,
+  "terraform_version": "1.9.8",
+  "serial": 80,
+  "lineage": "0cdd9d00-5bd1-6414-c3ec-e147e5758c9e",
+  "outputs": {
+    "central_buckets": {
+      "value": {
+        "cce": "prod-cn-north-4-cce-logs",
+        "function": "prod-cn-north-4-function-logs",
+        "rds": "prod-cn-north-4-rds-logs"
+      },
+      "type": [
+        "object",
+        {
+          "cce": "string",
+          "function": "string",
+          "rds": "string"
+        }
+      ]
+    }
+  },
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "huaweicloud_obs_bucket",
+      "name": "access_logs",
+      "provider": "provider[\"registry.terraform.io/huaweicloud/huaweicloud\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acl": "log-delivery-write",
+            "bucket": "prod-cn-north-4-s3-access-logs-93ba8510",
+            "bucket_domain_name": "prod-cn-north-4-s3-access-logs-93ba8510.obs.cn-north-4.myhuaweicloud.com",
+            "bucket_key_enabled": "",
+            "bucket_version": "3.0",
+            "cors_rule": [],
+            "encryption": false,
+            "enterprise_project_id": "0",
+            "force_destroy": true,
+            "id": "prod-cn-north-4-s3-access-logs-93ba8510",
+            "kms_data_encryption": "",
+            "kms_key_id": "",
+            "kms_key_project_id": "",
+            "lifecycle_rule": [],
+            "logging": [],
+            "multi_az": false,
+            "parallel_fs": false,
+            "policy": "",
+            "policy_format": "obs",
+            "quota": 0,
+            "region": "cn-north-4",
+            "sse_algorithm": "",
+            "storage_class": "STANDARD",
+            "storage_info": [
+              {
+                "object_number": 0,
+                "size": 0
+              }
+            ],
+            "tags": {},
+            "user_domain_names": [],
+            "versioning": true,
+            "website": []
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "random_id",
+      "name": "suffix",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "b64_std": "k7qFEA==",
+            "b64_url": "k7qFEA",
+            "byte_length": 4,
+            "dec": "2478474512",
+            "hex": "93ba8510",
+            "id": "k7qFEA",
+            "keepers": null,
+            "prefix": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.log_destination_function",
+      "mode": "managed",
+      "type": "huaweicloud_kms_key",
+      "name": "logs",
+      "provider": "provider[\"registry.terraform.io/huaweicloud/huaweicloud\"]",
+      "instances": [
+        {
+          "status": "tainted",
+          "schema_version": 0,
+          "attributes": {
+            "creation_date": null,
+            "default_key_flag": null,
+            "domain_id": null,
+            "enterprise_project_id": null,
+            "expiration_time": null,
+            "id": "f89232d0-9b91-4533-bd03-75ce0d59c57b",
+            "is_enabled": true,
+            "key_algorithm": null,
+            "key_alias": "prod-function-logs-key",
+            "key_description": "Encryption key for function central log bucket",
+            "key_id": null,
+            "key_state": null,
+            "key_usage": null,
+            "keystore_id": null,
+            "origin": null,
+            "pending_days": "7",
+            "region": null,
+            "rotation_enabled": null,
+            "rotation_interval": null,
+            "rotation_number": null,
+            "scheduled_deletion_date": null,
+            "tags": null
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
